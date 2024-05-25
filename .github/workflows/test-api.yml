@@ -1,0 +1,30 @@
+name: Run test with cicd
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      -main
+
+jobs:
+  run_api_automation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test with pytest
+        run: pytest test/ -v
+
+      - name: Send Report Slack
+        run: python setting/slack_notification.py
