@@ -25,6 +25,11 @@ jobs:
 
       - name: Run test with pytest
         run: pytest test/ -v
+        env:
+          WEBHOOOK_SLACK: ${{ secrets.WEBHOOOK_SLACK }}
+          QASE_IO_TOKEN: ${{ secrets.QASE_IO_TOKEN }}
 
       - name: Send Report Slack
         run: python setting/slack_notification.py
+        env:
+          WEBHOOOK_SLACK: ${{ secrets.WEBHOOOK_SLACK }}
