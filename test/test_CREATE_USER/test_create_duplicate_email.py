@@ -20,6 +20,7 @@ def test():
          "status": "active"
     }
     req = requests.post(api_user, headers=head, json=payload)
+    print(req.json())
 
     # VALIDATION
     status_code = req.status_code
